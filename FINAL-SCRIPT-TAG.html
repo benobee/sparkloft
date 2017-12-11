@@ -1,0 +1,15 @@
+<script>
+(function(){
+  var script = {
+    execute: function(){
+      var src = "/s/bundle.js";
+      var script = document.createElement("script");
+
+      script.setAttribute("src", src);
+
+      var scriptLoader = document.body.appendChild(script);      
+    }
+  };
+  Squarespace.afterBodyLoad(script.execute());
+})();
+</script>
