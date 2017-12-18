@@ -1,0 +1,39 @@
+.sqs-edit-mode-active{
+  .progress-loader{
+    display:none !important;
+  }
+}
+
+.progress-loader{
+      transition:opacity 350ms;
+      opacity:1;
+      visibility:visibility;
+      
+      &.load-complete{
+      	opacity:0;
+        transition:0.35s;
+      	visibility:hidden;
+      }
+      z-index:9999;
+      position:fixed;
+      top:0;
+      right:0;
+      left:0;
+      bottom:0;
+      width:100%;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:@blue;
+      .progress-loader__spinner{
+          background:@blue;
+          width: 40px;
+          height: 40px;
+          animation: spin 2s linear infinite;
+          background-image:url(https://static1.squarespace.com/static/56c3bbbde32140bf1af5de49/t/5a32d33271c10b37da855c06/1513280306264/spark.png);
+          background-size:contain;
+          background-repeat:no-repeat;
+          background-position:center center;
+      } 
+}

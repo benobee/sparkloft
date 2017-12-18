@@ -1,0 +1,25 @@
+/* INTRO TAGLINE */
+#intro-copy-section {
+    background: #27C0EE;
+}
+
+body:not(.sqs-edit-mode-active) {
+    #block-40451df67ae542a09ec2 {
+        position: relative;
+        min-height: 20vh;
+        h1 {
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            transition: opacity 1.3s;
+            &.active-slide {
+                transition: opacity 1.5s 0.8s;
+                opacity: 1;
+            }
+        }
+    }
+}

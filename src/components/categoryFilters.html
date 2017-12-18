@@ -1,0 +1,6 @@
+<div id="filter-category-list" v-bind:class="{ active: isActive, 'transition-out': transitionActive }">
+	<div class="menu" v-on:click="closeMenu">
+		<div class="item" v-on:click="resetFilters">All</div>
+		<div class="item" v-for="item in categories" v-on:click="setFilter(item)">{{item}}</div>
+	</div>
+</div>

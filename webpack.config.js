@@ -116,6 +116,18 @@ const lessRules = {
 rules.push(lessRules);
 
 /*********************/
+// @rule: HTML
+const HTMLRules = {
+    test: /\.html$/,
+    exclude: /node_modules/,
+    use: { 
+        loader: 'html-loader' 
+    }
+}
+
+rules.push(HTMLRules);
+
+/*********************/
 
 // @rule: css autoprefixer
 const CSSRules = {
