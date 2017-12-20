@@ -4,6 +4,8 @@
 
 -   [portfolioListController](#portfoliolistcontroller)
 -   [collectionList](#collectionlist)
+-   [filterByCategory](#filterbycategory)
+-   [getUrlParameter](#geturlparameter)
 -   [categoryFilters](#categoryfilters)
 
 ## portfolioListController
@@ -19,10 +21,29 @@ and list filtering
 
 -   `data` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** from site collection
 -   `events` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** pub sub events
--   `collectionName`  
 -   `userDisplayOptions`  
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** compiled vue object config
+
+## filterByCategory
+
+Makes HTTP call to the specified collection with
+squarespace category filters. Loads new list with
+loading screen.
+
+**Parameters**
+
+-   `filter` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+## getUrlParameter
+
+Queries the location search for specific parameter.
+
+**Parameters**
+
+-   `name` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ## categoryFilters
 

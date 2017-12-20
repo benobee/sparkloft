@@ -11,10 +11,13 @@ import filtersHTML from "./categoryFilters.html";
  */
 
 const categoryFilters = (data, events) => {
-    const menu = {
+    const navButton = {
         el: "#filter-ui",
         template: `
             <div id="filter-ui">
+                <span class="filter-ui__icon" v-on:click="handleClick">
+                    <img src="https://static1.squarespace.com/static/56c3bbbde32140bf1af5de49/t/5a3853f2e4966b79a0f9aab1/1513640946108/filter.png"/>
+                </span>
                 <span class="filter-ui__label">{{ label }}</span>
                 <span v-on:click="handleClick" v-if="isActive" class="filter-ui__category">{{ currentFilter }}</span>
                 <span v-on:click="handleClick" v-else class="filter-ui__category">All</span>
@@ -90,7 +93,7 @@ const categoryFilters = (data, events) => {
     };
 
     return {
-        menu,
+        navButton,
         list
     };
 };

@@ -1,13 +1,14 @@
 <!-- target portfolio page id="portfolio-list" -->
 <div class="app-wrapper" v-bind:class="{ loaded: lifecycle.appLoaded, loading: isLoading }">
+    <div class="current-filter">
+        <span class="current-filter__label">Filtering By:</span>
+        <span class="current-filter__text">{{currentFilter}}</span>
+    </div>
     <transition-group name="list-complete" tag="div" class="collection-list">
-        <div v-for="item in items" :key="item.id" class="item" :data-item-id="item.id" :class="item | applyItemClasses">
-            <a v-bind:href="item.fullUrl" class="inner-content">
+        <div v-model="item" v-for="item in items" :key="item.id" class="item" :data-item-id="item.id" :class="item | applyItemClasses">
+            <a v-bind:href="item.fullUrl" class="inner-content" v-on:click="navigateToUrl">
                 <div class="media-wrapper" v-if="item.colorData" v-bind:style="item.colorData | suggestedColor">
-                    <div class="image">
-                        <img width="300px" height="200px" v-bind:src="item.assetUrl | formatSmall" v-bind:alt="item.title" v-bind:data-src="item.assetUrl" v-bind:data-image-dimensions="item.originalSize" v-bind:data-image="item.assetUrl" v-bind:data-image-focal-point="
-                        item.mediaFocalPoint.x + ',' + item.mediaFocalPoint.y" data-image-resolution="300w" v-bind:data-image-id="item.id" v-loadImage />
-                    </div>
+                    <item-image :item="item"></item-image>
                 </div>
                 <div class="meta-content">
                     <div class="info">

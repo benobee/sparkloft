@@ -1,0 +1,3 @@
+<div class="image">
+    <img v-bind:src="item.assetUrl | formatSmall" v-bind:alt="item.title" v-bind:data-src="item.assetUrl" v-bind:data-image-dimensions="item.originalSize" v-bind:data-image="item.assetUrl" v-bind:data-image-focal-point="item.mediaFocalPoint.x + ',' + item.mediaFocalPoint.y" v-bind:data-image-resolution="defaultResolution" v-bind:data-image-id="item.id" v-bind:data-image-loaded="isLoaded" />
+</div>

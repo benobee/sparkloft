@@ -13,10 +13,9 @@ import Events from "../core/events";
 const events = new Events();
 
 const collectionListController = {
-    init (parent, collectionName, displayOptions) {
+    init (parent, displayOptions) {
         this.config = {
             parent: parent.querySelector("#collection-items-vue"),
-            collectionName,
             displayOptions
         };
 
@@ -31,21 +30,21 @@ const collectionListController = {
     initializeVueComponents (data) {
         const filterComponents = categoryFilters(data, events);
 
-        Vue.component("collection-items", collectionList(data, events, this.config.collectionName, this.config.displayOptions));
+        Vue.component("collection-items", collectionList(data, events, this.config.displayOptions));
         Vue.component("category-filters", filterComponents.list);
 
         const filterList = new Vue({
             el: "#collection-filters-vue"
         });
 
-        const filterUI = new Vue(filterComponents.menu);
+        const navButton = new Vue(filterComponents.navButton);
 
         const items = new Vue({
             el: "#collection-items-vue"
         });
 
         return {
-            filterUI,
+            navButton,
             filterList,
             items
         };

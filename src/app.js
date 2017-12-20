@@ -11,16 +11,16 @@ const App = {
     },
     execute () {
         if (this.portfolio) {
-            collectionlistController.init(this.portfolio, "portfolio", {
+            collectionlistController.init(this.portfolio, {
                 title: false
             });
         }
         if (this.blog) {
-            collectionlistController.init(this.blog, "blogcollection", {
+            collectionlistController.init(this.blog, {
                 excerpt: false
             });
         }
     }
 };
 
-App.init();
+window.onload = App.init();

@@ -1,5 +1,6 @@
 import itemHTML from "./collectionList.html";
 import util from "../util/util";
+import Image from "./image";
 
 /**
  * Vue component config for infinite scrolling
@@ -10,8 +11,11 @@ import util from "../util/util";
  * @returns {Object}        compiled vue object config
  */
 
-const collectionList = (data, events, collectionName, userDisplayOptions) => {
+const collectionList = (data, events, userDisplayOptions) => {
     return {
+        components: {
+            "item-image": Image
+        },
         template: itemHTML,
         data () {
             let pagination = false;
@@ -19,6 +23,12 @@ const collectionList = (data, events, collectionName, userDisplayOptions) => {
             if (data.pagination) {
                 pagination = data.pagination;
             }
+
+            /**
+             * Default display options for a collection
+             * @type {Object}
+             * @private
+             */
 
             const displayOptions = {
                 image: true,
@@ -31,10 +41,11 @@ const collectionList = (data, events, collectionName, userDisplayOptions) => {
             }
 
             return {
+                currentFilter: "All",
                 fullUrl: data.collection.fullUrl,
                 items: data.items,
                 scrollHeight: 0,
-                currentItems: [],
+                disableScroll: false,
                 scrollBottom: false,
                 pagination,
                 displayOptions,
@@ -70,7 +81,6 @@ const collectionList = (data, events, collectionName, userDisplayOptions) => {
                 return itemClassNames.join(" ");
             },
 
-
             /**
              * Formats the image url to the available
              * squarespace resolutions.
@@ -85,7 +95,6 @@ const collectionList = (data, events, collectionName, userDisplayOptions) => {
                     backgroundColor: `#${colorData.suggestedBgColor}`
                 };
             },
-
             formatSmall (img) {
                 return `${img }?format=300w`;
             }
@@ -110,16 +119,38 @@ const collectionList = (data, events, collectionName, userDisplayOptions) => {
                 return className;
             }
         },
-        directives: {
-            loadImage: {
-                inserted (img) {
-                    img.onload = function () {
-                        img.setAttribute("data-image-loaded", true);
-                    };
-                }
-            }
-        },
         methods: {
+
+            /**
+             * The link click is intercepted to store the
+             * state of the list in case the user clicks the
+             * back button.
+             *
+             * @param  {Object} event
+             * @private
+             */
+
+            navigateToUrl (event) {
+                this.storeListState({
+                    scrollHeight: window.scrollY,
+                    currentFilter: this.currentFilter,
+                    currentItems: this.items
+                });
+                event.preventDefault();
+                window.location.href = event.currentTarget.href;
+            },
+
+            /**
+             * The state of the scroll and items will be
+             * stored in the history state for a smoother
+             * user experience.
+             *
+             * @private
+             */
+
+            storeListState (options) {
+                history.pushState(options, null, location.pathname + location.search);
+            },
             bindScrollEvents () {
                 window.addEventListener("load", this.executeScrollFunctions);
                 window.addEventListener("scroll", this.executeScrollFunctions);
@@ -148,6 +179,13 @@ const collectionList = (data, events, collectionName, userDisplayOptions) => {
                 this.appendItems(triggerAmount);
             },
 
+            scrollTo (scrollY) {
+                window.scroll({
+                    top: scrollY,
+                    left: 0
+                });
+            },
+
             /**
              * when the page is scrolled to the bottom of the current items
              * the next set or page of items will be auto appened to the bottom
@@ -170,6 +208,15 @@ const collectionList = (data, events, collectionName, userDisplayOptions) => {
                     this.pagination = false;
                 }
             },
+
+            /**
+             * Makes HTTP call to the specified collection with
+             * squarespace category filters. Loads new list with
+             * loading screen.
+             *
+             * @param  {String} filter
+             * @priavte
+             */
 
             filterByCategory (filter) {
                 let url = this.fullUrl;
@@ -200,21 +247,45 @@ const collectionList = (data, events, collectionName, userDisplayOptions) => {
              */
 
             listenToHistoryLesson () {
-                //set initial history state
+/*                if (history.state) {
+                    console.log(history.state);
+                    if (history.state.scrollHeight && history.state.scrollHeight > 0) {
+                        this.disableScroll = true;
+                        console.log("disabling scroll");
+                    }
+
+                    this.disableScroll = false;
+                }*/
+
                 window.addEventListener("popstate", (e) => {
-                    if (e.state.currentFilter) {
+                    if (e.state) {
                         events.emit("filter-set", { filterName: e.state.currentFilter, popstate: true });
                     }
                 });
             },
 
-            progressLoaderIsActive (bool) {
-                if (bool) {
+            /**
+             * A simple on / off loader. The div has been placed outside the
+             * Vue component.
+             *
+             * @param  {Bool} loaderState
+             * @private
+             */
+
+            progressLoaderIsActive (loaderState) {
+                if (loaderState) {
                     document.querySelector(".progress-loader").classList.remove("load-complete");
                 } else {
                     document.querySelector(".progress-loader").classList.add("load-complete");
                 }
             },
+
+            /**
+             * Queries the location search for specific parameter.
+             *
+             * @param  {String} name
+             * @returns {String}
+             */
 
             getUrlParameter (name) {
                 name = name.replace(/[[]/, "\\[").replace(/[\]]/, "\\]");
@@ -225,6 +296,13 @@ const collectionList = (data, events, collectionName, userDisplayOptions) => {
                 return results === null ? "" : decodeURIComponent(results[ 1 ].replace(/\+/g, " "));
             },
 
+            /**
+             * Looks at the location search params and sets the filter
+             * accordingly.
+             *
+             * @private
+             */
+
             checkUrlForFilter () {
                 const search = this.getUrlParameter("category");
 
@@ -233,12 +311,15 @@ const collectionList = (data, events, collectionName, userDisplayOptions) => {
                     events.emit("filter-set", { filterName: search });
                 } else {
                     events.emit("filter-set", { filterName: "All" });
-                    history.pushState({ currentFilter: "All" }, null, `/${collectionName}`);
+                    this.currentFilter = "All";
+                    this.storeListState({
+                        currentFilter: this.currentFilter
+                    });
                 }
             },
 
             encodeShareUrl (value) {
-                return `/${collectionName}?category=${encodeURIComponent(value)}`;
+                return `${location.pathname}?category=${encodeURIComponent(value)}`;
             }
         },
         mounted () {
@@ -246,9 +327,10 @@ const collectionList = (data, events, collectionName, userDisplayOptions) => {
             this.checkUrlForFilter();
             this.listenToHistoryLesson();
             events.on("filter-set", (e) => {
+                this.currentFilter = e.filterName;
                 if (!e.popstate) {
                     if (e.filterName === "All") {
-                        history.pushState({ currentFilter: "All" }, null, `/${collectionName}`);
+                        history.pushState({ currentFilter: "All" }, null, location.pathname);
                     } else {
                         history.pushState({ currentFilter: e.filterName }, null, this.encodeShareUrl(e.filterName));
                     }
@@ -262,10 +344,10 @@ const collectionList = (data, events, collectionName, userDisplayOptions) => {
             });
 
             setTimeout(() => {
-                this.lifecycle.appLoaded = true;
                 this.bindScrollEvents();
+                this.lifecycle.appLoaded = true;
                 this.progressLoaderIsActive(false);
-            }, 600);
+            }, 1200);
         }
     };
 };
