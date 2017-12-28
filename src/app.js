@@ -1,9 +1,9 @@
 import collectionlistController from "./core/collectionlistController";
 
 /**
- * App shell pattern. Looks for specific classnames 
+ * App shell pattern. Looks for specific classnames
  * in the body, stores the HTML and executes init scripts.
- * 
+ *
  * @type {Object}
  * @name App
  */

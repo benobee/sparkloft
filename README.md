@@ -2,15 +2,24 @@
 
 ### Table of Contents
 
--   [portfolioListController](#portfoliolistcontroller)
+-   [App](#app)
+    -   [collectionListController](#collectionlistcontroller)
+-   [events](#events)
 -   [collectionList](#collectionlist)
--   [filterByCategory](#filterbycategory)
--   [getUrlParameter](#geturlparameter)
 -   [categoryFilters](#categoryfilters)
 
-## portfolioListController
+## App
+
+App shell pattern. Looks for specific classnames
+in the body, stores the HTML and executes init scripts.
+
+### collectionListController
 
 All obects, components, event listeners localized to the portfolio list view
+
+## events
+
+Pub Sub Events
 
 ## collectionList
 
@@ -24,26 +33,6 @@ and list filtering
 -   `userDisplayOptions`  
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** compiled vue object config
-
-## filterByCategory
-
-Makes HTTP call to the specified collection with
-squarespace category filters. Loads new list with
-loading screen.
-
-**Parameters**
-
--   `filter` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-## getUrlParameter
-
-Queries the location search for specific parameter.
-
-**Parameters**
-
--   `name` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ## categoryFilters
 
