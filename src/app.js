@@ -6,7 +6,7 @@ const App = {
         this.execute();
     },
     cacheDOM () {
-        this.portfolio = document.querySelector(".collection-portfolio.view-list");
+        this.portfolio = document.querySelector(".collection-type-portfolio.view-list");
         this.blog = document.querySelector("#collection-5a345e48e4966b79a087b76f");
     },
     execute () {

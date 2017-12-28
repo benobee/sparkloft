@@ -1,17 +1,17 @@
 .app-wrapper {
     opacity: 0;
     transition: opacity 0.8s;
-    @media screen and (min-width:641px) {
+    @media screen and (min-width: 641px) {
         margin-top: 1em;
-        .current-filter{
-            display:none;
+        .current-filter {
+            display: none;
         }
     }
-    .current-filter{
-        text-align:center;
-        margin-bottom:1em;
-        .current-filter__text{
-            color:black;
+    .current-filter {
+        text-align: center;
+        margin-bottom: 1em;
+        .current-filter__text {
+            color: black;
         }
     }
     &.loading {
@@ -42,6 +42,10 @@
     &.loaded {
         opacity: 1;
     }
+    &:not(.loaded) {
+        overflow: hidden;
+        max-height: 0vh;
+    }
     .collection-list {
         max-width: 1700px;
         margin: 0 auto;
@@ -61,7 +65,7 @@
                     background: #f9f9f9;
                     padding: 0.5em;
                     font-size: 2em !important;
-                    border-bottom:4px solid @blueLight;
+                    border-bottom: 4px solid @blueLight;
                     max-width: 350px;
                     margin: 0 auto;
                 }
@@ -100,14 +104,14 @@
                 transition: transform 0.6s;
                 overflow: hidden;
                 .image {
-                    position:relative;
+                    position: relative;
                     img {
-                        width:100%;
-                        height:auto;
+                        width: 100%;
+                        height: auto;
                         backface-visibility: hidden;
                         transition: opacity 1s 0.3s;
                         opacity: 0;
-                        &[data-image-loaded=true]{
+                        &[data-image-loaded=true] {
                             opacity: 1;
                         }
                         margin-bottom: -7px;
@@ -131,8 +135,8 @@
                         display: block;
                         color: #1a1e21;
                         line-height: 1.5em;
-                        @media screen and (max-width:640px){
-                            padding:0.5em;
+                        @media screen and (max-width:640px) {
+                            padding: 0.5em;
                             font-size: 4vw;
                         }
                     }

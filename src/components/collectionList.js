@@ -149,6 +149,7 @@ const collectionList = (data, events, userDisplayOptions) => {
              */
 
             storeListState (options) {
+                options.scrollRestoration = "auto";
                 history.pushState(options, null, location.pathname + location.search);
             },
             bindScrollEvents () {
@@ -243,20 +244,10 @@ const collectionList = (data, events, userDisplayOptions) => {
              * from page to page that changes categories by the last
              * filter in the state object.
              *
-             * @private joke
+             * @private
              */
 
             listenToHistoryLesson () {
-/*                if (history.state) {
-                    console.log(history.state);
-                    if (history.state.scrollHeight && history.state.scrollHeight > 0) {
-                        this.disableScroll = true;
-                        console.log("disabling scroll");
-                    }
-
-                    this.disableScroll = false;
-                }*/
-
                 window.addEventListener("popstate", (e) => {
                     if (e.state) {
                         events.emit("filter-set", { filterName: e.state.currentFilter, popstate: true });
