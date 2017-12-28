@@ -5,12 +5,18 @@ import util from "../util/util";
 import Events from "../core/events";
 
 /**
- * All obects, components, event listeners localized to the portfolio list view
- * @type {Object}
- * @name portfolioListController
+ * Pub Sub Events
+ * @type {Events}
  */
 
 const events = new Events();
+
+/**
+ * All obects, components, event listeners localized to the portfolio list view
+ * @type {Object}
+ * @memberof App
+ * @name collectionListController
+ */
 
 const collectionListController = {
     init (parent, displayOptions) {

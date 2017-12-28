@@ -8,6 +8,7 @@ import Image from "./image";
  *
  * @param  {Object} data   from site collection
  * @param  {Object} events pub sub events
+ * @memberof collectionListController
  * @returns {Object}        compiled vue object config
  */
 
@@ -27,6 +28,8 @@ const collectionList = (data, events, userDisplayOptions) => {
             /**
              * Default display options for a collection
              * @type {Object}
+             * @memberof collectionList
+             * @name displayOptions
              * @private
              */
 
@@ -59,7 +62,8 @@ const collectionList = (data, events, userDisplayOptions) => {
 
             /**
              * Useful classnames for rendered items.
-             *
+             * @memberof collectionList
+             * @name applyItemClasses
              * @private
              */
 
@@ -86,6 +90,8 @@ const collectionList = (data, events, userDisplayOptions) => {
              * squarespace resolutions.
              *
              * @param  {Object} width
+             * @memberof collectionList
+             * @name suggestedColor
              * @returns {String}
              * @private
              */
@@ -127,6 +133,8 @@ const collectionList = (data, events, userDisplayOptions) => {
              * back button.
              *
              * @param  {Object} event
+             * @memberof collectionList
+             * @name navigateToUrl
              * @private
              */
 
@@ -145,6 +153,8 @@ const collectionList = (data, events, userDisplayOptions) => {
              * stored in the history state for a smoother
              * user experience.
              *
+             * @memberof collectionList
+             * @name storeListState
              * @private
              */
 
@@ -164,6 +174,8 @@ const collectionList = (data, events, userDisplayOptions) => {
             /**
              * Tests whether the collection list is at the bottom or not.
              *
+             * @memberof collectionList
+             * @name executeScrollFunctions
              * @private
              */
 
@@ -192,6 +204,8 @@ const collectionList = (data, events, userDisplayOptions) => {
              * the next set or page of items will be auto appened to the bottom
              *
              * @param  {Number} triggerAmount
+             * @memberof collectionList
+             * @name appendItems
              * @private
              */
 
@@ -216,7 +230,9 @@ const collectionList = (data, events, userDisplayOptions) => {
              * loading screen.
              *
              * @param  {String} filter
-             * @priavte
+             * @memberof collectionList
+             * @name filterByCategory
+             * @private
              */
 
             filterByCategory (filter) {
@@ -244,6 +260,8 @@ const collectionList = (data, events, userDisplayOptions) => {
              * from page to page that changes categories by the last
              * filter in the state object.
              *
+             * @memberof collectionList
+             * @name listenToHistoryLesson
              * @private
              */
 
@@ -260,6 +278,8 @@ const collectionList = (data, events, userDisplayOptions) => {
              * Vue component.
              *
              * @param  {Bool} loaderState
+             * @memberof collectionList
+             * @name progressLoaderIsActive
              * @private
              */
 
@@ -275,7 +295,10 @@ const collectionList = (data, events, userDisplayOptions) => {
              * Queries the location search for specific parameter.
              *
              * @param  {String} name
+             * @memberof collectionList
+             * @name getUrlParameter
              * @returns {String}
+             * @private
              */
 
             getUrlParameter (name) {
@@ -291,6 +314,8 @@ const collectionList = (data, events, userDisplayOptions) => {
              * Looks at the location search params and sets the filter
              * accordingly.
              *
+             * @memberof collectionList
+             * @name checkUrlForFilter
              * @private
              */
 
