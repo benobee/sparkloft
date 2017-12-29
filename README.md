@@ -30,7 +30,6 @@ and list filtering
 
 -   `data` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** from site collection
 -   `events` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** pub sub events
--   `userDisplayOptions`  
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** compiled vue object config
 
@@ -43,6 +42,6 @@ master controller config.
 **Parameters**
 
 -   `data` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** collection data
--   `events` **Oject** pub sub events
+-   `events` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** pub sub events
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** for use as a Vue component
