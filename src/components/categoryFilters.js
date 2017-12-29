@@ -8,6 +8,7 @@ import filtersHTML from "./categoryFilters.html";
  * @param  {Object} data   collection data
  * @param  {Oject} events pub sub events
  * @memberof collectionListController
+ * @name categoryFilters
  * @returns {Object}        for use as a Vue component
  */
 

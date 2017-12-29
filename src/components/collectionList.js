@@ -9,6 +9,7 @@ import Image from "./image";
  * @param  {Object} data   from site collection
  * @param  {Object} events pub sub events
  * @memberof collectionListController
+ * @name collectionList
  * @returns {Object}        compiled vue object config
  */
 
