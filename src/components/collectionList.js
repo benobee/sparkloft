@@ -77,7 +77,7 @@ const collectionList = (data, events, userDisplayOptions) => {
                     itemClassNames.push(item.categories.map((category) => `category-${util.slugify(category)}`).join(" "));
                 }
 
-                if (item.categories && item.categories.length > 0) {
+                if (item.tags && item.tags.length > 0) {
                     item.hasTags = true;
                     itemClassNames.push("has-tags");
                     itemClassNames.push(item.tags.map((tag) => `tag-${util.slugify(tag)}`).join(" "));
