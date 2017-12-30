@@ -71,19 +71,27 @@ const collectionList = (data, events, userDisplayOptions) => {
             applyItemClasses (item) {
                 const itemClassNames = [];
 
-                if (item.categories) {
+                if (item.categories && item.categories.length > 0) {
                     item.hasCategories = true;
                     itemClassNames.push("has-categories");
-                    itemClassNames.push(item.categories.map((category) => `category-${category.toLowerCase()}`).join(" "));
+                    itemClassNames.push(item.categories.map((category) => `category-${util.slugify(category)}`).join(" "));
+                }
+
+                if (item.categories && item.categories.length > 0) {
+                    item.hasTags = true;
+                    itemClassNames.push("has-tags");
+                    itemClassNames.push(item.tags.map((tag) => `tag-${util.slugify(tag)}`).join(" "));
                 }
 
                 if (item.colorData) {
                     itemClassNames.push("has-image");
-                } else {
-                    itemClassNames.push("no-image");
                 }
 
-                return itemClassNames.join(" ");
+                if (itemClassNames.length > 0) {
+                    itemClassNames.join(" ");
+                }
+
+                return itemClassNames;
             },
 
             /**

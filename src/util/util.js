@@ -37,7 +37,12 @@ const util = {
         return firstPart + secondPart;
     },
     slugify (value) {
-        return value.toLowerCase().replace(/ /g, "-").replace(/-&-/g, "-").replace(/[^\w-]+/g, "");
+        return value.toString().toLowerCase()
+            .replace(/\s+/g, "-")
+            .replace(/[^\w-]+/g, "")
+            .replace(/--+/g, "-")
+            .replace(/^-+/, "")
+            .replace(/-+$/, "");
     }
 };
 

@@ -15,7 +15,7 @@ const image = {
             };
         },
         formatSmall (img) {
-            return `${img}?format=300w`;
+            return `${img}?format=500w`;
         }
     },
     template: html,
